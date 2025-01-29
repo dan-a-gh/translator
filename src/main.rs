@@ -10,13 +10,13 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     /// translates text forwards
-    Forwards {
+    Encode {
         /// text to translate
         #[arg(short, long)]
         text: String,
     },
     /// translates text backwards
-    Backwards {
+    Decode {
         /// text to translate
         #[arg(short, long)]
         text: String
@@ -29,7 +29,7 @@ fn main() {
     // You can check for the existence of subcommands, and if found use their
     // matches just as you would the top level cmd
     match &cli.command {
-        Commands::Forwards { text } => {
+        Commands::Encode { text } => {
             let result = text.chars().into_iter().map(|character| {
                 match character {
                     'a' => '4',
@@ -48,7 +48,7 @@ fn main() {
             }).collect::<String>();
             println!("{}", result);
         },
-        Commands::Backwards { text } => {
+        Commands::Decode { text } => {
             let result = text.chars().into_iter().map(|character| {
                 match character {
                     '4' => 'a',
